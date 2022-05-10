@@ -4,7 +4,8 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub_cred')
 	}
-
+	
+	stages{
 	stage('Build') {
 
 			steps {
@@ -32,5 +33,6 @@ pipeline{
 			sh 'npm install'
 			sh 'npm test'
 		}
+	}
 	}
 }
