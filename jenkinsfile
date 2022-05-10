@@ -8,14 +8,14 @@ pipeline{
 	stage('Build') {
 
 			steps {
-				sh 'docker build -t raafetmadani/gl_project:late				st .'
+				sh 'docker build -t raafetmadani/gl_project:latest .'
 			}
 		}
 
 	stage('Login') {
 
 			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker log				in -u $DOCKERHUB_CREDENTIALS_USR --password-stdi				n'		
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'				n'		
 			}	
 		}
 
