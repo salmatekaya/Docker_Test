@@ -1,0 +1,36 @@
+pipeline{
+	agent any
+
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub_cred')
+	}
+
+	stage('Build') {
+
+			steps {
+				sh 'docker build -t raafetmadani/gl_project:late				st .'
+			}
+		}
+
+	stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker log				in -u $DOCKERHUB_CREDENTIALS_USR --password-stdi				n'		
+			}	
+		}
+
+	stage('Push') {
+
+			steps {
+				sh 'docker push raafetmadani/gl_project:latest'
+			}
+		}
+
+
+	stage('test'){
+		nodejs(nodeJSInstallationName: 'nodejs'){
+			sh 'npm install'
+			sh 'npm test'
+		}
+	}
+}
